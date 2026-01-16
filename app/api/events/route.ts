@@ -36,9 +36,6 @@ export async function POST(req: NextRequest) {
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    console.log("buffer: ", buffer);
-
-    //pass the buffer onto cloudinary to actually upload it
 
     const uploadResult = await new Promise((resolve, reject) => {
       cloudinary.uploader
