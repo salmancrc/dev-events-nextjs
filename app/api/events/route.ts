@@ -35,8 +35,6 @@ export async function POST(req: NextRequest) {
     }
 
     const arrayBuffer = await file.arrayBuffer();
-    console.log("arrayBuffer: ", arrayBuffer);
-
     const buffer = Buffer.from(arrayBuffer);
     console.log("buffer: ", buffer);
 
