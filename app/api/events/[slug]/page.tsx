@@ -55,7 +55,17 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }> 
             <p>{overview}</p>
           </section>
 
-          
+          <section className="flex-col-gap-2">
+            <h2>Event Details</h2>
+
+            <EventDetailItem icon="/icons/calender.svg" alt="calender" label={date} />
+            <EventDetailItem icon="/icons/clock.svg" alt="clock" label={time} />
+            <EventDetailItem icon="/icons/location.svg" alt="location" label={location} />
+            <EventDetailItem icon="/icons/mode.svg" alt="mode" label={mode} />
+            <EventDetailItem icon="/icons/audience.svg" alt="audience" label={audience} />
+          </section>
+
+          <EventAgenda agendaItems={JSON.parse(agenda[0])} />
 
           <EventTags tags={JSON.parse(tags[0])}/>
         </div>
