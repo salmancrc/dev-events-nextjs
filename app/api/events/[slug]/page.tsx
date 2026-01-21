@@ -67,6 +67,11 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }> 
 
           <EventAgenda agendaItems={JSON.parse(agenda[0])} />
 
+          <section className="flex-gap-col-2">
+            <h2>About the Organizer</h2>
+            <p>organizer</p>
+          </section>
+
           <EventTags tags={JSON.parse(tags[0])}/>
         </div>
         <aside className="booking">
