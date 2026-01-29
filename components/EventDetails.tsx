@@ -1,11 +1,10 @@
 import React from 'react'
-import {notFound} from "next/navigation";
-import {IEvent} from "@/database";
-import {getSimilarEventsBySlug} from "@/lib/actions/event.actions";
+import { notFound } from "next/navigation";
+import { IEvent } from "@/database";
+import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
 import Image from "next/image";
 import BookEvent from "@/components/BookEvent";
 import EventCard from "@/components/EventCard";
-import {cacheLife} from "next/cache";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -27,17 +26,20 @@ const EventAgenda = ({ agendaItems }: { agendaItems: string[] }) => (
     </div>
 )
 
-const EventTags = ({ tags }: { tags: string[] }) => (
-    <div className="flex flex-row gap-1.5 flex-wrap">
-        {tags.map((tag) => (
-            <div className="pill" key={tag}>{tag}</div>
-        ))}
-    </div>
-)
+const EventTags = ({ tags }: { tags: string[] }) => {
+    const cleanTags = JSON.parse(tags[0] || "[]");
+console.log("cleanTags: ", tags[0])
+    return (
+        <div className="flex flex-row gap-2 flex-wrap items-center">
+            {cleanTags.map((tag: string) => (
+                <span className="pill" key={tag}>{tag}</span>
+            ))}
+        </div>
+    );
+};
 
 const EventDetails = async ({ params }: { params: Promise<string> }) => {
     'use cache'
-    cacheLife('hours');
     const slug = await params;
 
     let event;
@@ -66,7 +68,7 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
 
     const { description, image, overview, date, time, location, mode, agenda, audience, tags, organizer } = event;
 
-    if(!description) return notFound();
+    if (!description) return notFound();
 
     const bookings = 10;
 
